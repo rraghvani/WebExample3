@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'test.css' %}">
+</head>
+<body>
+    <h1>Device Management</h1>
+    <div class="container">
+        <ul>
+            {% for device in devices %}
+            <li class="{% if device.enabled %}on{% else %}off{% endif %}">
+                <a href="{% url 'toggle_test' device.id %}">
+                    {{ device.name }} - {% if device.enabled %}On{% else %}Off{% endif %}
+                </a>
+            </li>
+            {% empty %}
+                <li class="device-item">No devices available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
